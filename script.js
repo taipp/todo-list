@@ -33,6 +33,8 @@ listContainer.addEventListener("click", function (event){
    }
    else if(event.target.tagName === 'SPAN'){
        event.target.parentElement.remove();
+       undoCoords(event, event.target.parentElement);
+
        saveData();
    }
    else if(event.target.classList.contains('edit-button')){
@@ -78,6 +80,48 @@ function finishEdit(event) {
     console.log('Edit finished.')
 }
 
+function undoCoords(event, parentElem){
+    /// Tip creating
+    let tipElem = document.createElement('div');
+    tipElem.classList.add('tip-element');
+
+    // let tipText = document.createElement('span')
+    // tipText.innerHTML = "Undo?"
+    // tipElem.appendChild(tipText);
+
+    let img = document.createElement('img');
+    img.src = 'img/undo-button.png';
+    img.classList.add('undo-button');
+    tipElem.appendChild(img);
+
+    document.body.append(tipElem);
+    console.log('Successfully added.')
+    /// Tip coords
+    let todoAppCords = listContainer.getBoundingClientRect();
+    let tipLeftCords = todoAppCords.right + tipElem.offsetWidth / 2;
+    let tipTopCords = todoAppCords.bottom + tipElem.offsetHeight - 10;
+
+    tipElem.style.left = tipLeftCords + 'px';
+    tipElem.style.top = 313 + 'px';
+
+    console.log('Coords applied')
+
+    /// Undo deletion
+
+    img.addEventListener("click", function (event) {
+        console.log('Button click!')
+        listContainer.appendChild(parentElem);
+        tipElem.remove();
+
+    } )
+
+
+    setTimeout(() => {
+        tipElem.remove(); // ”даление элемента через 5 секунд
+    }, 30000);
+
+}
+
 function saveData(){
     localStorage.setItem("data", listContainer.innerHTML);
 }
@@ -86,7 +130,10 @@ function showTask(){
     listContainer.innerHTML = localStorage.getItem("data");
 }
 
-showTask();
+
+
+// showTask(); /// ¬кЋё„»“№!
+
 
 
 

@@ -132,6 +132,33 @@ ul li span:hover{
     background-image: url("img/checkmark.png");
 }
 
+.tip-element{
+    position: fixed;
+    padding: 5px;
+    /*width: 60px;*/
+    background-color: white;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+/*.tip-element span{*/
+/*    font-weight: 500;*/
+/*}*/
+
+.tip-element img{
+    /*margin-left: 176px;*/
+    width: 20px;
+    height: 20px;
+    border-radius: 20%;
+    box-sizing: content-box;
+    /*padding: 3px;*/
+}
+
+.tip-element img:hover{
+    background-color: #dcdcdc;
+
+}
+
 /*ul li:after{*/
 /*    content: '';*/
 /*}*/
