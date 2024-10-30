@@ -97,13 +97,27 @@ function undoCoords(event, parentElem){
     document.body.append(tipElem);
     console.log('Successfully added.')
     /// Tip coords
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    let scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+
+    let rect = listContainer.getBoundingClientRect();
+
+    // ”станавливаем координаты относительно ближайшего контейнера
+    // tipElem.style.left = rect.right + 'px';
+    // tipElem.style.top = rect.top + 'px';
+
     let todoAppCords = listContainer.getBoundingClientRect();
-    let tipLeftCords = todoAppCords.right + tipElem.offsetWidth / 2;
-    let tipTopCords = todoAppCords.bottom + tipElem.offsetHeight - 10;
+    //
+    // let tipLeftCords = todoAppCords.right + window.scrollX + 10;
+    // let tipTopCords = todoAppCords.top + window.scrollY + 10;
+
+    let tipLeftCords = todoAppCords.right + tipElem.offsetWidth + scrollLeft - 10;
+    let tipTopCords = tipElem.offsetHeight - 10 + scrollTop + 289;
 
     tipElem.style.left = tipLeftCords + 'px';
-    tipElem.style.top = 313 + 'px';
+    tipElem.style.top = tipTopCords + 'px';
 
+    tipElem.classList.add('active-tip');
     console.log('Coords applied')
 
     /// Undo deletion
@@ -111,14 +125,21 @@ function undoCoords(event, parentElem){
     img.addEventListener("click", function (event) {
         console.log('Button click!')
         listContainer.appendChild(parentElem);
-        tipElem.remove();
+        tipElem.classList.remove('active-tip');
+        setTimeout(() => {
+            tipElem.remove(); // ”дал€ем элемент после завершени€ анимации
+        }, 200);
 
     } )
 
 
     setTimeout(() => {
-        tipElem.remove(); // ”даление элемента через 5 секунд
-    }, 30000);
+        tipElem.classList.remove('active-tip'); // ”даление элемента через 5 секунд
+    }, 5000);
+    setTimeout(() => {
+        tipElem.remove();
+    }, 5200);
+
 
 }
 
@@ -130,9 +151,12 @@ function showTask(){
     listContainer.innerHTML = localStorage.getItem("data");
 }
 
+// setInterval(() => {
+//     const rect = listContainer.getBoundingClientRect();
+//     alert('Right: ' + rect.right);
+// }, 5000);
 
-
-// showTask(); /// ¬кЋё„»“№!
+showTask(); /// ¬кЋё„»“№!
 
 
 

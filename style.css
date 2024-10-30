@@ -5,14 +5,20 @@
     box-sizing: border-box;
 }
 
+
 .container{
     width: 100%;
     min-height: 100vh;
     background: linear-gradient(135deg, #153677, #4e085f);
     padding: 10px;
+    /*width: 3000px;*/
+    /*height: 3000px;*/
 }
 
 .todo-app{
+    z-index: 1;
+
+    position: relative; /* Edit */
     width: 100%;
     max-width: 520px;
     background-color: white;
@@ -133,17 +139,23 @@ ul li span:hover{
 }
 
 .tip-element{
-    position: fixed;
+    z-index: 0;
+    position: absolute;
     padding: 5px;
     /*width: 60px;*/
     background-color: white;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
+    transition: 0.2s;
+    transform: translateX(-100%);
 }
 
-/*.tip-element span{*/
-/*    font-weight: 500;*/
-/*}*/
+.tip-element.active-tip{
+    transition: 0.2s;
+    transform: translateX(0);
+}
+
+
 
 .tip-element img{
     /*margin-left: 176px;*/
